@@ -1,0 +1,48 @@
+import java.util.Random;
+
+/**
+ * RandomNumberArrayGenerator ais inspired by this article 
+ * http://www.acuras.co.uk/articles/21-java-random-array-generator
+ * Java: Random Array Generator.
+ * and trusted optimizations suggested by this article
+ * http://www.javapractices.com/topic/TopicAction.do?Id=3
+ * Copy an array.
+ * Nothing new here, only some obvious implementations done.
+ *
+ * @author      Miguel Mendes Ruiz
+ * @version     1.0~may2012
+ * @since       1.7
+ */
+public class RandomNumberArrayGenerator {
+  private int[] numbers;
+  private final int max, size;
+
+  public RandomNumberArrayGenerator(int size, int max) {
+    this.max = max;
+    this.size = size;
+    generate();
+  }
+
+  public RandomNumberArrayGenerator(int size) {
+    this(size, 1000000);
+  }
+  
+  public int[] getNumbers() {
+    int[] copy = new int[size];
+    System.arraycopy(numbers, 0, copy, 0, size);
+    return copy;
+  }
+  
+  private void generate() {
+    generate(size);
+  }
+
+  private void generate(int size) {
+    Random generator = new Random();
+    numbers = new int[size];
+    for (int i = 0; i < size; i++) {
+      numbers[i] = generator.nextInt(max);
+    }
+  }
+
+}
